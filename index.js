@@ -1,46 +1,62 @@
 class Inhabitant {
-  constructor(species, name, legs, hands, gender, saying) {
+  constructor(species, name, gender, saying) {
     this.species = species;
     this.name = name;
-    this._legs = legs;
     this.gender = gender;
     this.saying = saying;
-    this.constants = {
-      props: ['species', 'name', 'gender', 'legs', 'saying'],
-    };
+    this.properties = [
+      'species',
+      'name',
+      'gender',
+      'legs',
+      'hands',
+      'saying',
+    ];
   }
-
   toString() {
-    return ['species', 'name', 'gender', 'legs', 'saying']
-      .map(prop => this[prop]).join('; ');
+    return this.properties
+      .map((propName) => this[propName])
+      .join('; ');
   }
 }
 
 class Dog extends Inhabitant {
-  constructor(name, gender, legs = 4, saying = 'woof') {
-    super('dog', name, legs, gender, saying);
+  constructor(name, gender) {
+    super('dog', name, gender, 'woof');
+    this.legs = 4;
   }
 }
-
-class Human extends Inhabitant {
-  constructor(name, gender, saying) {
-    super('human', name, 2, gender, saying);
+class Cat extends Inhabitant {
+  constructor(name, gender) {
+    super('cat', name, gender, 'meow');
+    this.legs = 4;
+  }
+}
+class Woman extends Inhabitant {
+  constructor(name, saying) {
+    super('human', name, 'female', saying);
+    this.legs = 2;
     this.hands = 2;
   }
-
-  toString() {
-    return super.toString() + this.hands + '; ';
+}
+class Man extends Inhabitant {
+  constructor(name, saying) {
+    super('human', name, 'male', saying);
+    this.legs = 2;
+    this.hands = 2;
   }
 }
 
-const heDog = new Dog('Bolt',
-   'male', 4, 'GAFF');
-const man = new Human('Jake', 'male', 'Horray!');
-const woman = new Human('Jane', 'female', 'Mee-mee-mee!');
+const dog = new Dog('Patron', 'male');
+const cat = new Cat('Murzyk', 'male');
+const woman = new Woman('Anna', 'Hola');
+const man = new Man('Joey', 'How you doin');
 
-[man, woman, heDog].forEach(printElement);
+const inhabitantDetails = [
+  String(dog),
+  String(cat),
+  String(woman),
+  String(man),
+];
 
-
-function printInhabitant(inhabitant) {
-  inhabitant.toString();
-}
+inhabitantDetails.forEach((item) => print(item));
