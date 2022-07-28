@@ -1,34 +1,34 @@
 const dog = {
+  species: 'dog',
   name: 'Patron',
   gender: 'male',
-  species: 'dog',
   legs: 4,
   hands: 0,
   saying: 'woof',
 };
 
 const cat = {
+  species: 'cat',
   name: 'Murzyk',
   gender: 'male',
-  species: 'cat',
   legs: 4,
   hands: 0,
   saying: 'meow',
 };
 
 const woman = {
+  species: 'human',
   name: 'Anna',
   gender: 'female',
-  species: 'human',
   legs: 2,
   hands: 2,
   saying: 'hello',
 };
 
 const man = {
+  species: 'human',
   name: 'Joey',
   gender: 'male',
-  species: 'human',
   legs: 2,
   hands: 2,
   saying: 'How you doin?',
@@ -37,14 +37,16 @@ const man = {
 const catWoman = Object.create(cat);
 catWoman.name = 'Cat-woman';
 catWoman.species = 'human';
+catWoman.gender = 'female';
 catWoman.legs = 2;
 catWoman.hands = 2;
 
-const inhabitantsArray = [dog, cat, woman, man, catWoman];
+const inhabitants = [dog, cat, woman, man, catWoman];
 
-inhabitantsArray
-  .map(
-    (item) =>
-      `${item.species}; ${item.name}; ${item.gender}; ${item.legs}; ${item.hands}; ${item.saying}`
-  )
-  .forEach((message) => print(message));
+const keys = ['species', 'name', 'gender', 'legs', 'hands', 'saying'];
+
+const details = inhabitants.map((item) => {
+  return keys.map((key) => item[key]);
+});
+
+details.forEach((item) => print(item.join('; ')));
