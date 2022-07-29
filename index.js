@@ -1,52 +1,60 @@
-const dog = {
-  species: 'dog',
-  name: 'Patron',
-  gender: 'male',
-  legs: 4,
-  hands: 0,
-  saying: 'woof',
-};
+class Inhabitant {
+  constructor(species, name, gender, legs, hands, saying) {
+    this.species = species;
+    this.name = name;
+    this.gender = gender;
+    this.legs = legs;
+    this.hands = hands;
+    this.saying = saying;
+    this._properties = [
+      'species',
+      'name',
+      'gender',
+      'legs',
+      'hands',
+      'saying',
+    ];
+  }
+  set properties(prop) {
+    this._properties.push(prop);
+  }
+  toString() {
+    return this._properties.map((prop) => this[prop]).join('; ');
+  }
+}
 
-const cat = {
-  species: 'cat',
-  name: 'Murzyk',
-  gender: 'male',
-  legs: 4,
-  hands: 0,
-  saying: 'meow',
-};
+class Dog extends Inhabitant {
+  constructor(name, gender) {
+    super('dog', name, gender, 4, 0, 'woof');
+  }
+}
+class Cat extends Inhabitant {
+  constructor(name, gender) {
+    super('cat', name, gender, 4, 0, 'meow');
+  }
+}
+class Woman extends Inhabitant {
+  constructor(name, saying) {
+    super('human', name, 'female', 2, 2, saying);
+  }
+}
+class Man extends Inhabitant {
+  constructor(name, saying) {
+    super('human', name, 'male', 2, 2, saying);
+  }
+}
 
-const woman = {
-  species: 'human',
-  name: 'Anna',
-  gender: 'female',
-  legs: 2,
-  hands: 2,
-  saying: 'hello',
-};
+const dog = new Dog('Patron', 'male');
+const cat = new Cat('Murzyk', 'male');
+const woman = new Woman('Anna', 'Hola');
+const man = new Man('Joey', 'How you doin');
 
-const man = {
-  species: 'human',
-  name: 'Joey',
-  gender: 'male',
-  legs: 2,
-  hands: 2,
-  saying: 'How you doin?',
-};
+const inhabitantArray = [
+  String(dog),
+  String(cat),
+  String(woman),
+  String(man),
+];
 
-const catWoman = Object.create(cat);
-catWoman.name = 'Cat-woman';
-catWoman.species = 'human';
-catWoman.gender = 'female';
-catWoman.legs = 2;
-catWoman.hands = 2;
-
-const inhabitants = [dog, cat, woman, man, catWoman];
-
-const keys = ['species', 'name', 'gender', 'legs', 'hands', 'saying'];
-
-const details = inhabitants.map((item) => {
-  return keys.map((key) => item[key]);
-});
-
-details.forEach((item) => print(item.join('; ')));
+inhabitantArray.forEach((item) => print(item));
+>>>>>>> oop
