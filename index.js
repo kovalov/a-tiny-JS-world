@@ -57,4 +57,3 @@ const inhabitantArray = [
 ];
 
 inhabitantArray.forEach((item) => print(item));
->>>>>>> oop
