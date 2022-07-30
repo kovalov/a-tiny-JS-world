@@ -52,7 +52,7 @@ const inhabitantPropertyNames = [
   'saying',
 ];
 
-const details = inhabitants.map((inhabitant) =>
+const inhabitantDetails = inhabitants.map((inhabitant) =>
   inhabitantPropertyNames.map((propName) => inhabitant[propName])
 );
 
