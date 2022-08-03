@@ -1,46 +1,56 @@
 class Inhabitant {
-  constructor(species, name, gender, legs, hands, saying) {
+  constructor(species, name, gender, saying) {
     this.species = species;
     this.name = name;
     this.gender = gender;
-    this.legs = legs;
-    this.hands = hands;
     this.saying = saying;
-    this._properties = [
-      'species',
-      'name',
-      'gender',
-      'legs',
-      'hands',
-      'saying',
-    ];
-  }
-  set properties(prop) {
-    this._properties.push(prop);
+    this.properties = ['species', 'name', 'gender', 'saying'];
   }
   toString() {
-    return this._properties.map((prop) => this[prop]).join('; ');
+    return this.properties
+      .map((propName) => this[propName])
+      .join('; ');
   }
 }
 
-class Dog extends Inhabitant {
+class Mammal extends Inhabitant {
+  constructor(species, name, gender, saying) {
+    super(species, name, gender, saying);
+    this.legs = 4;
+    this.properties = [...this.properties, 'legs'];
+  }
+}
+
+class Human extends Inhabitant {
+  constructor(name, gender, saying) {
+    super('human', name, gender, saying);
+    this.legs = 2;
+    this.hands = 2;
+    this.properties = [...this.properties, 'legs', 'hands'];
+  }
+}
+
+class Dog extends Mammal {
   constructor(name, gender) {
-    super('dog', name, gender, 4, 0, 'woof');
+    super('dog', name, gender, 'woof');
   }
 }
-class Cat extends Inhabitant {
+
+class Cat extends Mammal {
   constructor(name, gender) {
-    super('cat', name, gender, 4, 0, 'meow');
+    super('cat', name, gender, 'meow');
   }
 }
-class Woman extends Inhabitant {
+
+class Woman extends Human {
   constructor(name, saying) {
-    super('human', name, 'female', 2, 2, saying);
+    super(name, 'female', saying);
   }
 }
-class Man extends Inhabitant {
+
+class Man extends Human {
   constructor(name, saying) {
-    super('human', name, 'male', 2, 2, saying);
+    super(name, 'male', saying);
   }
 }
 
@@ -49,11 +59,11 @@ const cat = new Cat('Murzyk', 'male');
 const woman = new Woman('Anna', 'Hola');
 const man = new Man('Joey', 'How you doin');
 
-const inhabitantArray = [
+const inhabitantDetails = [
   String(dog),
   String(cat),
   String(woman),
   String(man),
 ];
 
-inhabitantArray.forEach((item) => print(item));
+inhabitantDetails.forEach((item) => print(item));
